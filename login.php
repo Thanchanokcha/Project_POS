@@ -31,6 +31,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
         <title>LOGIN POS</title> <!-- ชื่อเว็บ -->
 
         <!-- ไอคอนชื่อเว็บ-->
@@ -94,7 +97,7 @@
                                 <fieldset>
                                     <div class="form-group">
                                         <label for="name">Username</label>
-                                        <input type="text" name="login-username" placeholder="Enter username" required class="form-control"/>
+                                        <input type="text" name="login-username" placeholder="Enter username" required class="form-control" />
                                     </div>
                 
                                     <div class="form-group">
@@ -104,8 +107,29 @@
                                     <br>
                                     <center>
                                     <div class="form-group">
-                                        <input type="submit" name="login" value="login" class="btn btn-secondary"/>
+                                        <input id="show" type="submit" name="login" value="Login" class="btn btn-secondary" />
                                     </div>
+                                    <dialog id="FirstDialog">
+                                            <div class="form-row">
+                                                <legend>ยินดีต้อนรับ เข้าสู่ระบบ</legend>
+                                            </div>  
+                                    </dialog>
+                                        <script>
+                                            (function () {
+                                                var dialog = document.getElementById('FirstDialog');
+                                                document.getElementById('show').onclick = function() {
+                                                    swal({
+                                                        title: "Success!", //ข้อความ เปลี่ยนได้ เช่น บันทึกข้อมูลสำเร็จ!!
+                                                        //text: "Redirecting in 1 seconds.", //ข้อความเปลี่ยนได้ตามการใช้งาน
+                                                        type: "success", //success, warning, danger
+                                                        timer: 1000, //ระยะเวลา redirect 3000 = 3 วิ เพิ่มลดได้
+                                                        showConfirmButton: false //ปิดการแสดงปุ่มคอนเฟิร์ม ถ้าแก้เป็น true จะแสดงปุ่ม ok ให้คลิกเหมือนเดิม
+                                                    }, function(){
+                                                        window.location.href = "index.php"; 
+                                                        });         
+                                                };
+                                            })();
+                                        </script>
                                     <!-- <br> -->
                                     <!-- <button class="btn btn-primary" id="button-search" type="button">Login</button> -->
                                     </center>
