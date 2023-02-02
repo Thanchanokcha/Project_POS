@@ -32,6 +32,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
@@ -49,10 +51,10 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <!-- ชื่อระบบมุมซ้าย -->
-                <a class="navbar-brand" href="#!">LOGIN POS</a>
+                <div class="col-md-9"><a class="navbar-brand" href="#!">LOGIN POS</a> </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
+                    <ul class="navbar-nav ms-auto"> 
                         <!-- แถมเมนู -->
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="data.php">Admin</a></li>

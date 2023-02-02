@@ -9,7 +9,8 @@
 		if (isset($_POST['send'])) {
 			//ตรวจสอบข้อมูล
 			$type =$_POST['user_type'];
-			// $name = $_POST['user_name'];
+			$name = $_POST['user_name'];
+			$id = $_POST['user_id'];
 			// $breed = $_POST['user_breed'];
 			// $color = $_POST['user_color'];
 			// $gender = $_POST['user_gender'];
@@ -58,8 +59,8 @@
 
 		if (!$validate_error){
 			//เพิ่มข้อมูล project ในตาราง
-			$sql = "INSERT INTO post(user_type, user_date, user_time, user_note )
-			VALUE('" . $type . "'  , '" . $date . "' , '" . $time . "' , '" . $note . "')"; 
+			$sql = "INSERT INTO post(user_type, user_name, user_id, user_date, user_time, user_note )
+			VALUE('" . $type . "'  , '" . $name . "'  , '" . $id . "'  , '" . $date . "' , '" . $time . "' , '" . $note . "')"; 
 	
 			if (mysqli_query($con, $sql));
 			//execute without error
@@ -134,12 +135,10 @@
 
 					<div class="form-group">
 						<label for="name">ประเภท</label>
-						<center><br>
 						<label for="name">ลากิจ</label>
 						<input type="radio" name="user_type" value="ลากิจ">
 						<label for="name">ลาป่วย</label>
 						<input type="radio" name="user_type" value="ลาป่วย">
-						</center>
 					</div>
 
 					<!-- <form action="" method="post" enctype="multipart/form-data">
@@ -157,12 +156,15 @@
 					</div>
 					</form>
 					 -->
-
-			
-					<!-- <div class="form-group">
+					 <div class="form-group">
 						<label for="name">ชื่อ</label>
-						<input type="text" name="user_name" placeholder="เช่น โกโก้ , แพนด้า" required value="" class="form-control" />
-					</div> -->
+						<input type="text" name="user_name" placeholder="" required value="<?php echo $_SESSION['name']; ?>" class="form-control" />
+					</div>
+			
+					<div class="form-group">
+						<label for="name">ชื่อ</label>
+						<input type="id" name="user_id" placeholder="" required value="<?php echo $_SESSION['id']; ?>" class="form-control" />
+					</div>
 
 					<!-- <div class="form-group">
 						<label for="name">พันธุ์</label>
