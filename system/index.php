@@ -123,7 +123,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <!-- ชื่อระบบมุมซ้าย -->
-                <div class="col-md-8"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
+                <div class="col-md-6"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
@@ -132,7 +132,9 @@
                         <?php if (isset($_SESSION['id'])) { ?>
                         <li class="nav-item"><a class="nav-link"> รหัสพนักงาน&nbsp;<?php echo $_SESSION['id']; ?>&nbsp;คุณ<?php echo $_SESSION['name']; ?></a></li>
 		                <?php }  ?>
+                        <li class="nav-item"><a class="nav-link" href="post.php">post</a></li>
 			            <li class="nav-item"><a class="nav-link" href="login.php">Logout</a></li>
+                        
                         <!-- <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li> -->
                         <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
                     </ul>
@@ -164,6 +166,7 @@
             <div class="col-md-4 col-md-offset-4 text-center">
             <input id="submit" type="submit" name="Check in" value="ลงชื่อเข้างาน" class="btn btn-dark"/>&nbsp;&nbsp;
             <input id="leave" type="submit" name="leave" value="ลาป่วย/ลากิจ" class="btn btn-dark"/>
+            
 
             <dialog id="FirstDialog">
                 <div>
@@ -285,10 +288,10 @@
                                         <center>
                                         <div class="form-group">
                                             <input type="submit" name="send" value="ยืนยัน" class="btn btn-dark"/>
+                                            <button id="close" class="btn btn-dark">ย้อนกลับ</button>
                                         </div>
-                                        <button id="close" class="btn btn-dark">ย้อนกลับ</button><br><br>
                                         </center>
-                                    </fieldset>
+                                    </fieldset><br>
                                 </form>
                                 <!--3.display message แสดงข้อความ error ที่เกิดขึ้น -->
                                 <?php

@@ -57,7 +57,7 @@
                     <ul class="navbar-nav ms-auto"> 
                         <!-- แถมเมนู -->
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="data.php">Admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
                         <!-- <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li> -->
                         <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
                     </ul>
@@ -98,7 +98,7 @@
 			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="loginform">
 				<fieldset>
 					<div class="form-group">
-						<label for="name">อีเมล</label>
+						<label for="name">ชื่อผู้ใช้งาน</label>
 						<input type="text" name="login-email" placeholder="ป้อนอีเมล" required class="form-control" />
 					</div>
 
@@ -130,7 +130,7 @@
             </div>
         </div>
         </div>
-
+        </div>
            <!-- Footer-->
 		   <footer class="py-1 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Thankyou</p></div>
