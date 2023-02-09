@@ -18,8 +18,9 @@
 			// $color = $_POST['user_color'];
 			// $gender = $_POST['user_gender'];
 			// $age = $_POST['user_age'];
-			$date =$_POST['user_date'];
-			$time =$_POST['user_time'];
+			$date1 =$_POST['user_date1'];
+			$date2 =$_POST['user_date2'];
+            $time =$_POST['user_time'];
 			$note =$_POST['user_note'];
 			// $img = basename($_FILES["user_img"]["name"]);
 			//$path="upload/" . $img;
@@ -62,8 +63,8 @@
 
 		if (!$validate_error){
 			//เพิ่มข้อมูล project ในตาราง
-			$sql = "INSERT INTO post(user_type, user_name, user_id, user_date, user_time, user_note )
-			VALUE('" . $type . "'  , '" . $name . "'  , '" . $id . "'  , '" . $date . "' , '" . $time . "' , '" . $note . "')"; 
+			$sql = "INSERT INTO post(user_type, user_name, user_id, user_date1, user_date2, user_time, user_note )
+			VALUE('" . $type . "'  , '" . $name . "'  , '" . $id . "'  , '" . $date1 . "' , '" . $date2 . "' ,  '" . $time . "' , '" . $note . "')"; 
 	
 			if (mysqli_query($con, $sql));
 			//execute without error
@@ -135,7 +136,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <!-- ชื่อระบบมุมซ้าย -->
-                <div class="col-md-8"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
+                <div class="col-md-6"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
@@ -179,18 +180,21 @@
 
             <dialog id="FirstDialog">
                 <div class="">
+                 
                     <h3> ลงเวลาเข้างาน <?php echo date('d-m-Y');?></h3>
                     <form action="save.php"  method="post" class="form-horizontal">
+                        
                     <div class="form-group">
-                        <div class="form-group col-md-5">
+                        <center>
+                        <div class="form-group col-md-7">
                             <label for="user_id">รหัสพนักงาน</label>  
                             <input type="text" class="form-control"   name="user_id"   placeholder="รหัสพนักงาน" required value="<?php echo $_SESSION['id']; ?>" readonly>
                         </div>
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-7">
                             <label for="user_name">ชื่อพนักงาน</label>  
                             <input type="text" class="form-control"   name="user_name"   placeholder="รหัสพนักงาน" required value="<?php echo $_SESSION['name']; ?>" readonly>
                         </div>
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-7">
                             <label for="work_id">เวลาเข้างาน</label>
                             <?php if(isset($rowio['work_in'])){ ?>
                             <input type="text" class="form-control"   name="work_in"   value="<?php echo $rowio['work_in'];?>"  disabled>
@@ -198,6 +202,8 @@
                             <input type="text" class="form-control"   name="work_in"   value="<?php echo date('H:i:s');?>"  readonly>
                             <?php  } ?>
                         </div>
+                        </center>
+                        
                         <div class="col col-xs-6">
                             <button type="submit" name="submit" value="submit" class="btn btn-dark">ยืนยัน</button>
                             <button type="close" id="hide" class="btn btn-dark">ปฏิเสธ</button>
@@ -300,8 +306,13 @@
                                         </div> -->
 
                                         <div class="form-group col-md-15">
-                                            <label for="name">วันที่</label>
-                                            <input type="date" name="user_date" required class="form-control" />
+                                            <label for="name">วันที่เริ่มต้น</label>
+                                            <input type="date" name="user_date1" required class="form-control" />
+                                        </div>
+
+                                        <div class="form-group col-md-15">
+                                            <label for="name">วันที่สิ้นสุด</label>
+                                            <input type="date" name="user_date2" required class="form-control" />
                                         </div>
 
                                         <div class="form-group col-md-15">
@@ -321,7 +332,6 @@
                                         <button id="close" class="btn btn-dark">ย้อนกลับ</button><br><br>
                                         </center>
                                     </fieldset>
-                                </form>
                                 <!--3.display message แสดงข้อความ error ที่เกิดขึ้น -->
                                 <?php
                                     if (isset($validate_error)){
@@ -332,15 +342,10 @@
                                 ?>
                             </div>
                         </div>
-                        <!-- <div class="row justify-content-center">
-                            <div class="col-md-4 col-md-offset-4 text-center">
-                            กรุณาคลิกปุ่มด้านล่างนี้ หากมีบัญชีแล้ว 
-                            <br><br>
-                            <button onclick="document.location='login.php'" class="btn btn-secondary">เข้าสู่ระบบ</button>
-                            </div>
-                        </div> -->
-                    </div>
+                    </div>  
+                </div>
                 </dialog>
+
                 <script>
                     (function () {
                         var dialog = document.getElementById('leavedialog');
@@ -355,9 +360,10 @@
             
             </div>
         </div>
-
-
+    </div> 
+</div>
         
+<br>
         <!-- Footer-->
         <footer class="py-1 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Thankyou</p></div>

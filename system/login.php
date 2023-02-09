@@ -98,8 +98,8 @@
 			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="loginform">
 				<fieldset>
 					<div class="form-group">
-						<label for="name">อีเมล</label>
-						<input type="text" name="login-email" placeholder="ป้อนอีเมล" required class="form-control" />
+						<label for="name">ชื่อผู้ใช้งาน</label>
+						<input type="text" name="login-email" placeholder="ป้อนชื่อผู้ใช้งาน" required class="form-control" />
 					</div>
 
 					<div class="form-group">

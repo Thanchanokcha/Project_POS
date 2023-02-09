@@ -15,6 +15,7 @@
 		}
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -82,6 +83,7 @@
                     <!-- Search widget-->
                     <div class="card mb-4">
                         <center><div class="card-header">Login System</div></center>
+                    
 
 <div class="card-body">
 			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="loginform">
@@ -108,8 +110,10 @@
 		</div>
 	</div>
 </div>
-    <!-- Footer-->
-	<footer class="py-1 bg-dark">
+</div>
+   
+   <!-- Footer-->
+   <footer class="py-1 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Thankyou</p></div>
         </footer>
         <!-- Bootstrap core JS-->

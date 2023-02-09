@@ -66,11 +66,12 @@
             <div class="table-responsive">
                 <table class="table table-bordered  bg-white ">
                     <thead>
-                     <tr>
+                     <tr><center>
                          <th>รหัสพนักงาน</th>
                          <th>ชื่อ</th>
                          <th>ลงชื่อเข้าทำงาน</th>
-                         <th>วัน</th>
+                         <th>วันที่เริ่มต้น</th>
+                         <th>วันที่สิ้นสุด</th>
                          <th>เวลา</th>
                          <th>หมายเหตุ</th>
                          <!-- <th>อายุ</th>
@@ -79,7 +80,7 @@
                          <th>ติดต่อ</th>
                          <th>รูปภาพ</th> -->
                          <th colspan="2" style="text-align:center">กิจกรรม</th>
-                     </tr>
+                     </tr></center>
                 </thead>
             <tbody>
 
@@ -89,7 +90,8 @@
                         <td><?php echo $row['user_id'];?></td>
                         <td><?php echo $row['user_name'];?></td>
                         <td><?php echo $row['user_type'];?></td>
-                        <td><?php echo $row['user_date'];?></td>
+                        <td><?php echo $row['user_date1'];?></td>
+                        <td><?php echo $row['user_date2'];?></td>
                         <td><?php echo $row['user_time'];?></td>
                         <td><?php echo $row['user_note'];?></td>
                         <td><input type="button" value="แก้ไข" name="btn-edit" class="btn btn-dark" onclick = "update_user (<?php echo $row['user_id']; ?>);"></td>
