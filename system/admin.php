@@ -11,7 +11,7 @@
 			$_SESSION['name'] = "Admin";
 			header("location: show_user.php");
 		} else {
-			$error_msg = "ชื่อผู้ใช้งาน หรือ รหัสผ่านผิดพลาด";
+			$error_msg = "Incorrect e-mail or password.";
 		}
 	}
 ?>
@@ -95,14 +95,14 @@
 						<label for="name">รหัสผ่าน</label>
 						<input type="password" name="admin-password" placeholder="ป้อนรหัสผ่าน" required class="form-control" />
 					</div>
-
-					<!--8.display message -->
-					<span class="text-danger">
-						<?php if (isset($error_msg)) { echo $error_msg; } ?>
-					</span>
 					<center><div class="form-group">
 						<input type="submit" name="admin-login" value="Login" class="btn btn-dark" />
-					</center></div>
+					</center>
+                    <!--8.display message -->
+					<span class="text-danger text-center">
+						<?php if (isset($error_msg)) { echo $error_msg; } ?>
+					</span>
+                </div>
 				</fieldset>
 			</form>
 		</div>

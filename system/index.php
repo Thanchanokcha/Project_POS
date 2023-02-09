@@ -1,81 +1,93 @@
 <?php
-	session_start();
-	include_once 'dbconnect.php';
+		//2.save regist info into database
+		//2.1 เพิ่ม ข้อมูล user สำหรับ ฐานข้อมูล
+		session_start();
 
-    if (isset($_GET['user_id'])) {
-		$sql = "SELECT * FROM project WHERE user_id = " . $_GET['user_id'];
-		$result = mysqli_query($con, $sql);
-    }
-
-    if (isset($_POST['send'])) {
-        //ตรวจสอบข้อมูล
-        $type =$_POST['user_type'];
-        $name = $_POST['user_name'];
-        $id = $_POST['user_id'];
-        // $breed = $_POST['user_breed'];
-        // $color = $_POST['user_color'];
-        // $gender = $_POST['user_gender'];
-        // $age = $_POST['user_age'];
-        $date =$_POST['user_date'];
-        $time =$_POST['user_time'];
-        $note =$_POST['user_note'];
-        // $img = basename($_FILES["user_img"]["name"]);
-        //$path="upload/" . $img;
-
-        // $img_type = $_FILES['user_img']['type'];
-        // $size = $_FILES['user_img']['size'];
-        // $img_temp = $_FILES['user_img']['tmp_name'];
-        
-        // $path = "upload/" . $img;
-        // if (!file_exists($path)){
-        // 	move_uploaded_file($img_temp, 'upload/' .$img);
-        // }
-        // if($upload !='') {
-        // 	$path="upload/";
-        // 	//คัดลอกไฟล์ไปยังโฟลเดอร์
-        // 	move_uploaded_file($_FILES['user_img'],$img ); 
-        // }
-
-        // if (empty($img)){
-        // 	$validate_msg ="กรุณาเลือกรูปภาพ";
-        // } else if ($img_type == "image/jpg" || $img_type == "image/jpeg" || $img_type == "image/png" || $img_type == "image/gif") {
-        // 	if (!file_exists($path)){ //เช็คว่ามีไฟล์ที่อัปไหม
-        // 		if ($size < 5000000) { //เช็คขนาดไฟล์ ไม่เกิน 5 mb
-        // 			move_uploaded_file($img_temp, 'upload/' .$img); //เป็นการย้ายไฟล์ที่อัปไปยังโฟลเดอ upload
-        // 		} else {
-        // 			$validate_msg = "รูปภาพของคุณมีขนาดใหญ่เกิน 5 MB"; //เป็นการแจ้งว่าไฟล์มีขนาดใหญ่เกิน
-        // 		}
-        // 	} else {
-        // 		$validate_msg = "คุณยังไม่อัปโหลดรูปภาพ";
-        // 	}
-        // } else {
-        // 	$validate_msg = "กรุณาอัปโหลดรูปภาพที่มีนามสกุลเป็น JPG , JPEG , PNG และ GIF";
-        // }
-        
-        //2.2 ตรวจสอบความถูกต้องของข้อมูล user 
-        //สร้างตัวแปร validate_error เพื่อเช็ค error
-        $validate_error = false;
-        //สร้างตัวแปรอีกตัว เพื่อแจ้งข้อความ
-        $validate_msg = "";
-
-        if (!$validate_error){
-            //เพิ่มข้อมูล project ในตาราง
-            $sql = "INSERT INTO post(user_type, user_name, user_id, user_date, user_time, user_note )
-            VALUE('" . $type . "'  , '" . $name . "'  , '" . $id . "'  , '" . $date . "' , '" . $time . "' , '" . $note . "')"; 
-
-            if (mysqli_query($con, $sql));
-            //execute without error
-
-            // header("location: index.php");
-
-            // header เป็นการลิ้งไปยังหน้า login โดยการใช้ location: ตามด้วยชื่อไฟล์ที่ต้องการให้ลิ้งไป 
-            //เมื่อมีการกด signup จะไปอีกหน้าทันที
-        } else {
-            //error
+		include_once "dbconnect.php"; //หรือใช้ require_once
+        if (isset($_GET['user_id'])) {
+            $sql = "SELECT * FROM project WHERE user_id = " . $_GET['user_id'];
+            $result = mysqli_query($con, $sql);
         }
-    }
-?>
+		//เช็คว่า ฟอร์ม มีการกดปุ่ม submit โดยใช้คำสั่ง isset ($_POST['ชื่อปุ่ม'])
+		if (isset($_POST['send'])) {
+			//ตรวจสอบข้อมูล
+			$type =$_POST['user_type'];
+			$name = $_POST['user_name'];
+			$id = $_POST['user_id'];
+			// $breed = $_POST['user_breed'];
+			// $color = $_POST['user_color'];
+			// $gender = $_POST['user_gender'];
+			// $age = $_POST['user_age'];
+			$date =$_POST['user_date'];
+			$time =$_POST['user_time'];
+			$note =$_POST['user_note'];
+			// $img = basename($_FILES["user_img"]["name"]);
+			//$path="upload/" . $img;
+	
+			// $img_type = $_FILES['user_img']['type'];
+			// $size = $_FILES['user_img']['size'];
+			// $img_temp = $_FILES['user_img']['tmp_name'];
+			
+			// $path = "upload/" . $img;
+			// if (!file_exists($path)){
+			// 	move_uploaded_file($img_temp, 'upload/' .$img);
+			// }
+			// if($upload !='') {
+			// 	$path="upload/";
+			// 	//คัดลอกไฟล์ไปยังโฟลเดอร์
+			// 	move_uploaded_file($_FILES['user_img'],$img ); 
+			// }
 
+			// if (empty($img)){
+			// 	$validate_msg ="กรุณาเลือกรูปภาพ";
+			// } else if ($img_type == "image/jpg" || $img_type == "image/jpeg" || $img_type == "image/png" || $img_type == "image/gif") {
+			// 	if (!file_exists($path)){ //เช็คว่ามีไฟล์ที่อัปไหม
+			// 		if ($size < 5000000) { //เช็คขนาดไฟล์ ไม่เกิน 5 mb
+			// 			move_uploaded_file($img_temp, 'upload/' .$img); //เป็นการย้ายไฟล์ที่อัปไปยังโฟลเดอ upload
+			// 		} else {
+			// 			$validate_msg = "รูปภาพของคุณมีขนาดใหญ่เกิน 5 MB"; //เป็นการแจ้งว่าไฟล์มีขนาดใหญ่เกิน
+			// 		}
+			// 	} else {
+			// 		$validate_msg = "คุณยังไม่อัปโหลดรูปภาพ";
+			// 	}
+			// } else {
+			// 	$validate_msg = "กรุณาอัปโหลดรูปภาพที่มีนามสกุลเป็น JPG , JPEG , PNG และ GIF";
+			// }
+		
+		//2.2 ตรวจสอบความถูกต้องของข้อมูล user 
+		//สร้างตัวแปร validate_error เพื่อเช็ค error
+		$validate_error = false;
+		//สร้างตัวแปรอีกตัว เพื่อแจ้งข้อความ
+		$validate_msg = "";
+
+		if (!$validate_error){
+			//เพิ่มข้อมูล project ในตาราง
+			$sql = "INSERT INTO post(user_type, user_name, user_id, user_date, user_time, user_note )
+			VALUE('" . $type . "'  , '" . $name . "'  , '" . $id . "'  , '" . $date . "' , '" . $time . "' , '" . $note . "')"; 
+	
+			if (mysqli_query($con, $sql));
+			//execute without error
+
+			// header("location: index.php");
+
+			// header เป็นการลิ้งไปยังหน้า login โดยการใช้ location: ตามด้วยชื่อไฟล์ที่ต้องการให้ลิ้งไป 
+			//เมื่อมีการกด signup จะไปอีกหน้าทันที
+		} else {
+			//error
+		}
+        //เวลาปัจจุบัน
+        $timenow = date('H:i:s');
+        $datenow = date('Y-m-d');
+        //เวลาที่บันทึก
+        $queryworkio = "SELECT MAX(work_date) as lastdate, work_in FROM work_pos WHERE user_id='$id' AND work_date='$datenow' ";
+        $resultio = mysqli_query($con, $queryworkio) or die ("Error in query: $queryworkio " . mysqli_error($con));
+        $rowio = mysqli_fetch_array($resultio);
+        print_r($rowio);
+	}
+
+
+		
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +135,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <!-- ชื่อระบบมุมซ้าย -->
-                <div class="col-md-6"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
+                <div class="col-md-8"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
@@ -132,9 +144,7 @@
                         <?php if (isset($_SESSION['id'])) { ?>
                         <li class="nav-item"><a class="nav-link"> รหัสพนักงาน&nbsp;<?php echo $_SESSION['id']; ?>&nbsp;คุณ<?php echo $_SESSION['name']; ?></a></li>
 		                <?php }  ?>
-                        <li class="nav-item"><a class="nav-link" href="post.php">post</a></li>
 			            <li class="nav-item"><a class="nav-link" href="login.php">Logout</a></li>
-                        
                         <!-- <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li> -->
                         <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
                     </ul>
@@ -166,17 +176,36 @@
             <div class="col-md-4 col-md-offset-4 text-center">
             <input id="submit" type="submit" name="Check in" value="ลงชื่อเข้างาน" class="btn btn-dark"/>&nbsp;&nbsp;
             <input id="leave" type="submit" name="leave" value="ลาป่วย/ลากิจ" class="btn btn-dark"/>
-            
 
             <dialog id="FirstDialog">
-                <div>
-                <legend>คุณ<?php echo $_SESSION['name']; ?><br>รหัสพนักงาน&nbsp;<?php echo $_SESSION['id']; ?><br>ยืนยันการเข้าทำงานหรือไม่?</legend>
+                <div class="">
+                    <h3> ลงเวลาเข้างาน <?php echo date('d-m-Y');?></h3>
+                    <form action="save.php"  method="post" class="form-horizontal">
                     <div class="form-group">
-                        <button type="submit" name="submit" value="submit" class="btn btn-dark">ยืนยัน</button>
-                        <button type="close" id="hide" class="btn btn-dark">ปฏิเสธ</button>
+                        <div class="form-group col-md-5">
+                            <label for="user_id">รหัสพนักงาน</label>  
+                            <input type="text" class="form-control"   name="user_id"   placeholder="รหัสพนักงาน" required value="<?php echo $_SESSION['id']; ?>" readonly>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="user_name">ชื่อพนักงาน</label>  
+                            <input type="text" class="form-control"   name="user_name"   placeholder="รหัสพนักงาน" required value="<?php echo $_SESSION['name']; ?>" readonly>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="work_id">เวลาเข้างาน</label>
+                            <?php if(isset($rowio['work_in'])){ ?>
+                            <input type="text" class="form-control"   name="work_in"   value="<?php echo $rowio['work_in'];?>"  disabled>
+                            <?php }else{ ?>
+                            <input type="text" class="form-control"   name="work_in"   value="<?php echo date('H:i:s');?>"  readonly>
+                            <?php  } ?>
+                        </div>
+                        <div class="col col-xs-6">
+                            <button type="submit" name="submit" value="submit" class="btn btn-dark">ยืนยัน</button>
+                            <button type="close" id="hide" class="btn btn-dark">ปฏิเสธ</button>
+                        </div>
                     </div>
-                </div>
+            </div>
             </dialog>
+                    </form> 
             <script>
                 (function () {
                     var dialog = document.getElementById('FirstDialog');
@@ -288,10 +317,10 @@
                                         <center>
                                         <div class="form-group">
                                             <input type="submit" name="send" value="ยืนยัน" class="btn btn-dark"/>
-                                            <button id="close" class="btn btn-dark">ย้อนกลับ</button>
                                         </div>
+                                        <button id="close" class="btn btn-dark">ย้อนกลับ</button><br><br>
                                         </center>
-                                    </fieldset><br>
+                                    </fieldset>
                                 </form>
                                 <!--3.display message แสดงข้อความ error ที่เกิดขึ้น -->
                                 <?php

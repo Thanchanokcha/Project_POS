@@ -98,7 +98,7 @@
 			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="loginform">
 				<fieldset>
 					<div class="form-group">
-						<label for="name">ชื่อผู้ใช้งาน</label>
+						<label for="name">อีเมล</label>
 						<input type="text" name="login-email" placeholder="ป้อนอีเมล" required class="form-control" />
 					</div>
 
@@ -130,7 +130,7 @@
             </div>
         </div>
         </div>
-        </div>
+
            <!-- Footer-->
 		   <footer class="py-1 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Thankyou</p></div>
