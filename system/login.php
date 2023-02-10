@@ -56,8 +56,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto"> 
                         <!-- แถมเมนู -->
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="admin.php">Admin</a></li>
+                        <li class="nav-item"><a class="nav-link "  href="login.php">Login</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="admin.php">Admin</a></li>
                         <!-- <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li> -->
                         <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
                     </ul>
@@ -109,7 +109,7 @@
 
 					<center>
 					<div class="form-group">
-						<input type="submit" name="login" value="login" class="btn btn-dark"/>
+						<input type="submit" name="login" value="Login" class="btn btn-dark"/>
 					</div>
 					</center>
 				</fieldset>

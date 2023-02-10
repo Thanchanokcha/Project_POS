@@ -63,7 +63,7 @@
 
 		if (!$validate_error){
 			//เพิ่มข้อมูล project ในตาราง
-			$sql = "INSERT INTO post(user_type, user_name, user_id, user_date1, user_date2, user_time, user_note )
+			$sql = "INSERT INTO post( user_type, user_name, user_id, user_date1, user_date2, user_time, user_note )
 			VALUE('" . $type . "'  , '" . $name . "'  , '" . $id . "'  , '" . $date1 . "' , '" . $date2 . "' ,  '" . $time . "' , '" . $note . "')"; 
 	
 			if (mysqli_query($con, $sql));
@@ -83,7 +83,7 @@
         $queryworkio = "SELECT MAX(work_date) as lastdate, work_in FROM work_pos WHERE user_id='$id' AND work_date='$datenow' ";
         $resultio = mysqli_query($con, $queryworkio) or die ("Error in query: $queryworkio " . mysqli_error($con));
         $rowio = mysqli_fetch_array($resultio);
-        print_r($rowio);
+        //print_r($rowio);
 	}
 
 
@@ -179,22 +179,20 @@
             <input id="leave" type="submit" name="leave" value="ลาป่วย/ลากิจ" class="btn btn-dark"/>
 
             <dialog id="FirstDialog">
+                <form action="save.php" method="post" class="form-horizontal">
                 <div class="">
-                 
-                    <h3> ลงเวลาเข้างาน <?php echo date('d-m-Y');?></h3>
-                    <form action="save.php"  method="post" class="form-horizontal">
-                        
+                    <h3> ลงเวลาเข้างาน <?php echo date('d-m-Y');?></h3>        
                     <div class="form-group">
-                        <center>
-                        <div class="form-group col-md-7">
+                    <center>
+                        <div class="form-group col-md-5">
                             <label for="user_id">รหัสพนักงาน</label>  
                             <input type="text" class="form-control"   name="user_id"   placeholder="รหัสพนักงาน" required value="<?php echo $_SESSION['id']; ?>" readonly>
                         </div>
-                        <div class="form-group col-md-7">
+                        <div class="form-group col-md-5">
                             <label for="user_name">ชื่อพนักงาน</label>  
                             <input type="text" class="form-control"   name="user_name"   placeholder="รหัสพนักงาน" required value="<?php echo $_SESSION['name']; ?>" readonly>
                         </div>
-                        <div class="form-group col-md-7">
+                        <div class="form-group col-md-5">
                             <label for="work_id">เวลาเข้างาน</label>
                             <?php if(isset($rowio['work_in'])){ ?>
                             <input type="text" class="form-control"   name="work_in"   value="<?php echo $rowio['work_in'];?>"  disabled>
@@ -202,27 +200,25 @@
                             <input type="text" class="form-control"   name="work_in"   value="<?php echo date('H:i:s');?>"  readonly>
                             <?php  } ?>
                         </div>
-                        </center>
-                        
                         <div class="col col-xs-6">
-                            <button type="submit" name="submit" value="submit" class="btn btn-dark">ยืนยัน</button>
-                            <button type="close" id="hide" class="btn btn-dark">ปฏิเสธ</button>
+                            <button type="submit" name="submit" value="submit" class="btn btn-dark" onClick='alert("ระบบบันทึกเรียบร้อยแล้ว")'>ยืนยัน</button>
+                            <input id='refuse' type="button" name="send" value="ปฏิเสธ" class="btn btn-dark"/>
                         </div>
                     </div>
-            </div>
+                    <script>
+                    (function () {
+                        var dialog = document.getElementById('FirstDialog');
+                        document.getElementById('submit').onclick = function() {
+                            dialog.showModal();
+                        };
+                        document.getElementById('refuse').onclick = function() {
+                            dialog.close();
+                        };
+                    })();
+                </script>
+                </form>
             </dialog>
-                    </form> 
-            <script>
-                (function () {
-                    var dialog = document.getElementById('FirstDialog');
-                    document.getElementById('submit').onclick = function() {
-                        dialog.showModal();
-                    };
-                    document.getElementById('hide').onclick = function() {
-                        dialog.close();
-                    };
-                })();
-            </script>
+            </div>
         </div>
 
             
@@ -243,11 +239,11 @@
                                         </div>
                                     -->
 
-                                        <div class="form-group">
+                                        <div class="form-check">
                                             <label for="name">ประเภท</label>
-                                            <label for="name">ลากิจ</label>
+                                            <label class="form-check-label" for="name">ลากิจ</label>
                                             <input type="radio" name="user_type" value="ลากิจ">
-                                            <label for="name">ลาป่วย</label>
+                                            <label class="form-check-label" for="name">ลาป่วย</label>
                                             <input type="radio" name="user_type" value="ลาป่วย">
                                         </div>
 
@@ -272,7 +268,7 @@
                                         </div>
                                 
                                         <div class="form-group col-md-15">
-                                            <label for="name">ชื่อ</label>
+                                            <label for="name">รหัสพนักงาน</label>
                                             <input type="id" name="user_id" placeholder="" required value="<?php echo $_SESSION['id']; ?>" class="form-control" />
                                         </div>
 
@@ -328,8 +324,8 @@
                                         <center>
                                         <div class="form-group">
                                             <input type="submit" name="send" value="ยืนยัน" class="btn btn-dark"/>
+                                            <button id="close" class="btn btn-dark">ย้อนกลับ</button><br><br>
                                         </div>
-                                        <button id="close" class="btn btn-dark">ย้อนกลับ</button><br><br>
                                         </center>
                                     </fieldset>
                                 <!--3.display message แสดงข้อความ error ที่เกิดขึ้น -->
