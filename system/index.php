@@ -85,9 +85,7 @@
         $rowio = mysqli_fetch_array($resultio);
         //print_r($rowio);
 	}
-
-
-		
+    		
 ?>
 
 <!DOCTYPE html>
@@ -107,6 +105,7 @@
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
         <title>LOGIN POS</title> <!-- ชื่อเว็บ -->
+        
 
         <!-- ไอคอนชื่อเว็บ-->
         <link rel="icon" type="image/x-icon" href="assets/CPALL1.png" />
@@ -136,7 +135,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <!-- ชื่อระบบมุมซ้าย -->
-                <div class="col-md-6"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
+                <div class="col-md-5"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
@@ -145,7 +144,8 @@
                         <?php if (isset($_SESSION['id'])) { ?>
                         <li class="nav-item"><a class="nav-link"> รหัสพนักงาน&nbsp;<?php echo $_SESSION['id']; ?>&nbsp;คุณ<?php echo $_SESSION['name']; ?></a></li>
 		                <?php }  ?>
-			            <li class="nav-item"><a class="nav-link" href="login.php">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="history.php">ประวัติการเข้างาน</a></li>
+			            <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Logout</a></li>
                         <!-- <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li> -->
                         <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
                     </ul>
@@ -184,15 +184,15 @@
                     <h3> ลงเวลาเข้างาน <?php echo date('d-m-Y');?></h3>        
                     <div class="form-group">
                     <center>
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-7">
                             <label for="user_id">รหัสพนักงาน</label>  
                             <input type="text" class="form-control"   name="user_id"   placeholder="รหัสพนักงาน" required value="<?php echo $_SESSION['id']; ?>" readonly>
                         </div>
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-7">
                             <label for="user_name">ชื่อพนักงาน</label>  
                             <input type="text" class="form-control"   name="user_name"   placeholder="รหัสพนักงาน" required value="<?php echo $_SESSION['name']; ?>" readonly>
                         </div>
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-7">
                             <label for="work_id">เวลาเข้างาน</label>
                             <?php if(isset($rowio['work_in'])){ ?>
                             <input type="text" class="form-control"   name="work_in"   value="<?php echo $rowio['work_in'];?>"  disabled>
@@ -324,7 +324,7 @@
                                         <center>
                                         <div class="form-group">
                                             <input type="submit" name="send" value="ยืนยัน" class="btn btn-dark"/>
-                                            <button id="close" class="btn btn-dark">ย้อนกลับ</button><br><br>
+                                            <button id="close" class="btn btn-dark">ย้อนกลับ</button>
                                         </div>
                                         </center>
                                     </fieldset>

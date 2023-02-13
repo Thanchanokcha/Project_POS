@@ -8,32 +8,27 @@
 		$sql = "SELECT * FROM post WHERE user_id = " . $_GET['user_id'];
 		$result = mysqli_query($con, $sql);
 		$row_update = mysqli_fetch_array($result);
-		$user_id = $row_update['user_id'];
-		// $type = $row_update['user_type'];
+		$type =$row_update['user_type'];
 		$name = $row_update['user_name'];
-		$breed = $row_update['user_breed'];
-		$color = $row_update['user_color'];
-		$gender = $row_update['user_gender'];
-		$age = $row_update['user_age'];
-		// $date = $row_update['user_date'];
-		$location = $row_update['user_location'];
-		$contact = $row_update['user_contact'];
-		// $img = $row_update['user_img'];
+		$id = $row_update['user_id'];
+		$date1 = $row_update['user_date1'];
+		$date2 = $row_update['user_date2'];
+        $time = $row_update['user_time'];
+		$note = $row_update['user_note'];	
 	}
 
 	//check whether update button is clicked
 	if (isset($_POST['update'])) {
+
 		$user_id = $_POST['id'];
 		// $type =$_POST['user_type'];
+		$type =$_POST['user_type'];
 		$name = $_POST['user_name'];
-		$breed = $_POST['user_breed'];
-		$color = $_POST['user_color'];
-		$gender = $_POST['user_gender'];
-		$age = $_POST['user_age'];
-		// $date =$_POST['user_date'];
-		$location =$_POST['user_location'];
-		$contact =$_POST['user_contact'];
-		// $img =$_POST['user_img'];
+		$id = $_POST['user_id'];
+		$date1 =$_POST['user_date1'];
+		$date2 =$_POST['user_date2'];
+        $time =$_POST['user_time'];
+		$note =$_POST['user_note'];
 
 		//สร้างตัวแปร validate_error เพื่อเช็ค error
 		$validate_error = false;
@@ -42,7 +37,7 @@
 
 
 		if (!$validate_error) {
-			$sql = "UPDATE post SET user_name = '" . $name . "', user_breed = '" . $breed . "' , user_color = '" . $color . "', user_gender = '" . $gender . "' , user_age = '" . $age . "', user_location = '" . $location . "', user_contact = '" . $contact . "'  WHERE user_id = " . $user_id;
+			$sql = "UPDATE post SET  user_type = '" . $type . "' , user_name = '" . $name . "', user_date1 = '" . $date1 . "' , user_date2 = '" . $date2 . "', user_time = '" . $time . "', user_note = '" . $note . "'  WHERE user_id = " . $user_id;
 			
 			if (mysqli_query($con, $sql)) {
 				header ("location: show_user.php");
@@ -52,128 +47,131 @@
 		}
 	}
 ?>
-
 <!DOCTYPE html>
-<html>
-<head>
-<title>HOME PETS</title>
-	<!-- <meta content="width=device-width, initial-scale=1.0" name="viewport" >
-	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" /> -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-	<!-- Font Awesome icons (free version)-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-        crossorigin="anonymous"></script>
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet">
-    <!-- Fonts CSS-->
-	<link rel="stylesheet" href="css/heading.css">
-    <link rel="stylesheet" href="css/body.css">
-</head>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link rel="stylesheet" href="/lib/bootstrap.min.css">
+        <script src="/lib/jquery-1.12.2.min.js"></script>
+        <script src="/lib/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">
+        <title>LOGIN POS</title> <!-- ชื่อเว็บ -->
+        
 
-<body id="page-top">
-	<nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
-        <div class="container"><a class="navbar-brand js-scroll-trigger" href="index.php"><img src="assets/img/image0_copy.png" height="55" width="55">      HOME PETS</a>
-            <button class="navbar-toggler navbar-toggler-right font-weight-bold bg-primary text-white rounded"
-                type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars"></i></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                            href="index.php">Home pets</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="logout.php">ออกจากระบบ</a></li>
-                </ul>
-        	</div>
-    	</div>
-	</nav>
+        <!-- ไอคอนชื่อเว็บ-->
+        <link rel="icon" type="image/x-icon" href="assets/CPALL1.png" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- <style>
+        dialog {
+            background-color:whitesmoke;
+            color: rgb(0, 0, 0);
+            border: 1px solid rgba(0,0,5,0.3) ;
+            border-radius: 30px;
+            bottom: 0;
+            padding:20px;
+            box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+            box-sizing: content-box;
+            width: 500px;
+            /*margin-top:7em;
+            max-width:25em;
+             */
+            }
+        </style> -->
+    </head>
 
-<header class="masthead bg-primary">
+    <!-- <body class="py-5 bg-light border-bottom mb-4"> -->
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <!-- ชื่อระบบมุมซ้าย -->
+                <div class="col-md-5"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
+                        <!-- แถมเมนู -->
+
+                        <?php if (isset($_SESSION['id'])) { ?>
+                        <li class="nav-item"><a class="nav-link"> รหัสพนักงาน&nbsp;<?php echo $_SESSION['id']; ?>&nbsp;คุณ<?php echo $_SESSION['name']; ?></a></li>
+		                <?php }  ?>
+                        <li class="nav-item"><a class="nav-link" href="history.php">ประวัติการเข้างาน</a></li>
+			            <li class="nav-item"><a class="nav-link" href="login.php">Logout</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li> -->
+                        <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+<header><br>
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-md-5 col-md-offset-4 well">
+		<div class="col-md-3 col-md-offset-4 well">
 			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="updateform">
 				<fieldset>
 					
-					<h1 class="masthead-heading mb-0 text-secondary text-center">อัปเดตข้อมูล</h1>
+					<h1 class="masthead-heading mb-0 text text-center">อัปเดตข้อมูล</h1>
         			<!-- Icon Divider-->
-       				 <div class="divider-custom">
-           				<div class="divider-custom-line"></div>
-            			<div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            			<div class="divider-custom-line"></div>
-        			</div>
-
+       				
 					<!--14.display old info in text field -->
 					<div class="form-group">
 						<input type="hidden" name="id" value="<?php echo $user_id; ?>" />
+						<br>
+                                   <div class="form-check">
+								   			<center>
+                                            <label for="name">ประเภท</label>
+                                            <label class="form-check-label" for="name">ลากิจ</label>
+                                            <input type="radio" name="user_type" value="ลากิจ">
+                                            <label class="form-check-label" for="name">ลาป่วย</label>
+                                            <input type="radio" name="user_type" value="ลาป่วย">
+											</center>
+                                        </div>
 
-						<label for="name">ชื่อ</label>
-						<input type="text" name="user_name"  required value="<?php echo $name; ?>" class="form-control" />
+                                        <div class="form-group col-md-15">
+                                            <label for="name">ชื่อ</label>
+                                            <input type="text" name="user_name" placeholder="" required value="<?php echo $_SESSION['name']; ?>"readonly class="form-control" />
+                                        </div>
+                                
+                                        <div class="form-group col-md-15">
+                                            <label for="name">รหัสพนักงาน</label>
+                                            <input type="id" name="user_id" placeholder="" required value="<?php echo $_SESSION['id']; ?>"readonly class="form-control" />
+                                        </div>
+
+
+                                        <div class="form-group col-md-15">
+                                            <label for="name">วันที่เริ่มต้น</label>
+                                            <input type="date" name="user_date1" required class="form-control" />
+                                        </div>
+
+                                        <div class="form-group col-md-15">
+                                            <label for="name">วันที่สิ้นสุด</label>
+                                            <input type="date" name="user_date2" required class="form-control" />
+                                        </div>
+
+                                        <div class="form-group col-md-15">
+                                            <label for="name">เวลา</label>
+                                            <input type="time" name="user_time"  required class="form-control" />
+                                        </div>
+
+                                        <div class="form-group col-md-15">
+                                            <label for="name">หมายเหตุ</label>
+                                            <input type="text" name="user_note" required class="form-control" />
+                                        </div> 
+                                    
 					</div>
-
-					<!-- <div class="form-group">
-					<label for="name">ประเภท</label>
-						<br><center>
-						<label for="name">สุนัข</label>
-						<input type="radio" name="user_type" value="<?php echo $type; ?>"/><img src="https://cdn.discordapp.com/attachments/881810685317742603/900789788142096424/3089512.png" height="55" width="55">
-						<label for="name">แมว</label>
-						<input type="radio" name="user_type" value="<?php echo $type; ?>"/><img src="https://cdn.discordapp.com/attachments/881810685317742603/900789782878240798/1864514.png" height="55" width="55"></center>
-					</div> -->
-
-					<!-- <div class="form-group">
-					<form action="" method="post" enctype="multipart/form-data">
-						<center>	
-						<input type="file" name="user_img" required value="<?php echo $img; ?>" accept="image/jpeg, image/png, image/jpg"> <br>
-						<font color="secondary">*อัพโหลดได้เฉพาะ .jpeg , .jpg , .png </font>
-						</center> -->
-                        <!-- <button type="submit" class="btn btn-secondary">อัพโหลด</button> -->
-                    <!-- </form>
-					</div> -->
-
 					
-					<div class="form-group">
-						<label for="name">พันธุ์</label>
-						<input type="text" name="user_breed"  required value="<?php echo $breed; ?>" class="form-control" />
-					</div>
-
-					<div class="form-group">
-					<label for="name">สี</label>
-						<input type="text" name="user_color" required value="<?php echo $color; ?>" class="form-control" />
-					</div>
-
-					<div class="form-group">
-					<label for="name">เพศ</label>
-						<input type="text" name="user_gender" required value="<?php echo $gender; ?>" class="form-control">
-					</div>
-
-					<!-- <div class="form-group">
-					<label for="name">เพศ</label>
-                        <select name="user_gender"required value = "<?php echo $gender; ?>" class="form-control">
-                            <option value="ตัวผู้">ตัวผู้</option>
-                            <option value="ตัวเมีย">ตัวเมีย</option>
-                            <option value="ไม่ทราบ">ไม่ทราบ</option>
-                        </select>
-					</div> -->
-
-					<div class="form-group">
-					<label for="name">อายุ</label>
-						<input type="text" name="user_age"  required value="<?php echo $age; ?>" class="form-control" />
-					</div>
-
-					<div class="form-group">
-					<label for="name">พิกัด</label>
-						<input type="text" name="user_location"  required value="<?php echo $location; ?>" class="form-control" />
-					</div>
-
-					<div class="form-group">
-					<label for="name">ติดต่อ</label>
-						<input type="text" name="user_contact"  required value="<?php echo $contact; ?>" class="form-control" />
-					</div>
-
 					<center>
 					<div class="form-group">
-						<input type="submit" name="update" value="อัพเดต" class="btn btn-secondary"/>
+						<input type="submit" name="update" value="อัพเดต" class="btn btn-dark"/>
 					</div>
 					</center>
 				</fieldset>
@@ -185,10 +183,16 @@
 	</div>
 </div>
 <!-- <br> -->
-<center><button onclick="document.location='show_user.php'" class="btn btn-secondary">ย้อนกลับ</button></center>
+<center><button onclick="document.location='history.php'" class="btn btn-dark">ย้อนกลับ</button></center>
 </header>
-<!-- Copyright Section-->
-<section class="copyright py-4 text-center text-white">
-<div class="container"><small class="pre-wrap">ผู้จัดทำ นายปกรณ์ ชิตพงษ์ | นางสาว ธันย์ชนก เจริญฟูประเสริฐ | นายธีรภัทร บ่าหมะ | PSU | FMS | BIS </small></div></section>
-</body>
+<br>
+        <!-- Footer-->
+        <footer class="py-1 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Thankyou</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
 </html>
