@@ -16,18 +16,18 @@ include("dbconnect.php");
 			VALUES('$workdate', '$id', '$name' ,'$workin')";
 			$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error($con));
 
-				//	mysqli_close($con);
-				//	if($result){
-				//	echo "<script type='text/javascript'>";
-				//	echo "alert('บันทึกข้อมูลสำเร็จ');";
-				//	echo "window.location = 'index.php'; ";
-				//	echo "</script>";
-				//	}else{
-				//	echo "<script type='text/javascript'>";
-				//	echo "alert('Error');";
-				//	echo "window.location = 'index.php'; ";
-				//	echo "</script>";
-				//	}
+				mysqli_close($con);
+				if($result){
+				echo "<script type='text/javascript'>";
+				echo "alert('บันทึกข้อมูลสำเร็จ');";
+				echo "window.location = 'index.php'; ";
+				echo "</script>";
+				}else{
+				echo "<script type='text/javascript'>";
+				echo "alert('Error');";
+				echo "window.location = 'index.php'; ";
+				echo "</script>";
+				}
 
 		//save workout			
  	}elseif(isset($_POST["workout"])) {

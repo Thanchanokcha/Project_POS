@@ -9,8 +9,10 @@
         }
 
     // fetch records
-    $sql = "SELECT * FROM post ORDER BY user_id ASC"; //มากไปน้อย DESC น้อยไปมาก ASC
-    $result = mysqli_query($con, $sql);
+    //$sql = "SELECT * FROM post ORDER BY user_id ASC"; //มากไปน้อย DESC น้อยไปมาก ASC
+    //$result = mysqli_query($con, $sql);
+    $sql = "SELECT * FROM post WHERE user_id = '".$_SESSION['id']."'";
+    $result = mysqli_query($con,$sql) or die("Error:" . mysqli_error());
 
     $cnt = 1;
 
@@ -69,6 +71,9 @@
  <header><br>
  <div class="container">
      <!-- <div class="row"> -->
+            <div class="form-group">
+				<input type="button" onclick="window.location='index.php'" value="ย้อนกลับ" class="btn btn-dark" />
+			</div>
             <h1 class="text-center">ตารางลงชื่อ</h1>	
             <div class="table-responsive">
                 <table class="table table-bordered  bg-white ">
@@ -81,11 +86,7 @@
                          <th>วันที่สิ้นสุด</th>
                          <th>เวลา</th>
                          <th>หมายเหตุ</th>
-                         <!-- <th>อายุ</th>
-                         <th>วันที่โพสต์</th>
-                         <th>พิกัด</th>
-                         <th>ติดต่อ</th>
-                         <th>รูปภาพ</th> -->
+
                          <th colspan="2" style="text-align:center">กิจกรรม</th>
                      </tr></center>
                 </thead>

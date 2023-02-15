@@ -201,7 +201,7 @@
                             <?php  } ?>
                         </div>
                         <div class="col col-xs-6">
-                            <button type="submit" name="submit" value="submit" class="btn btn-dark" onClick='alert("ระบบบันทึกเรียบร้อยแล้ว")'>ยืนยัน</button>
+                            <button type="submit" name="submit" value="submit" class="btn btn-dark" >ยืนยัน</button>
                             <input id='refuse' type="button" name="send" value="ปฏิเสธ" class="btn btn-dark"/>
                         </div>
                     </div>

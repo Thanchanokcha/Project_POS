@@ -3,7 +3,7 @@
 
 		//13.display old info and update into users table
     include_once 'dbconnect.php';
-
+    //รับข้อมูลมาแก้ไข
 	if (isset($_GET['user_id'])) {
 		$sql = "SELECT * FROM post WHERE user_id = " . $_GET['user_id'];
 		$result = mysqli_query($con, $sql);
@@ -17,11 +17,10 @@
 		$note = $row_update['user_note'];	
 	}
 
-	//check whether update button is clicked
+	//กดปุ่มแล้วบันทึกลง data base
 	if (isset($_POST['update'])) {
 
 		$user_id = $_POST['id'];
-		// $type =$_POST['user_type'];
 		$type =$_POST['user_type'];
 		$name = $_POST['user_name'];
 		$id = $_POST['user_id'];
@@ -37,10 +36,10 @@
 
 
 		if (!$validate_error) {
-			$sql = "UPDATE post SET  user_type = '" . $type . "' , user_name = '" . $name . "', user_date1 = '" . $date1 . "' , user_date2 = '" . $date2 . "', user_time = '" . $time . "', user_note = '" . $note . "'  WHERE user_id = " . $user_id;
+			$sql = "UPDATE post SET  user_type = '" . $type . "' , user_name = '" . $name . "', user_date1 = '" . $date1 . "' , user_date2 = '" . $date2 . "', user_time = '" . $time . "', user_note = '" . $note . "'  WHERE user_id = " . $id;
 			
 			if (mysqli_query($con, $sql)) {
-				header ("location: show_user.php");
+				header ("location: history.php");
 			} else {
 				$error_msg = "อัปเดตข้อมูลไม่สำเร็จ";
 			}
@@ -171,7 +170,7 @@
 					
 					<center>
 					<div class="form-group">
-						<input type="submit" name="update" value="อัพเดต" class="btn btn-dark"/>
+						<input type="submit" name="update" value="อัพเดต" class="btn btn-dark" />
 					</div>
 					</center>
 				</fieldset>
