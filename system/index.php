@@ -160,7 +160,7 @@
                 <div class>
                     <!-- Featured blog post-->
                     
-                        <div class="container">
+                        <div class="container"><br><br><br>
                             <div class="text-center my-4">
                                 <!-- ข้อความอธิบาย -->
                                 <a  href="#!"><img src="https://upload.wikimedia.org/wikipedia/th/3/39/CPALL2015.png" "  height="200" width="300"/></a>
@@ -204,7 +204,6 @@
                             <button type="submit" name="submit" value="submit" class="btn btn-dark" >ยืนยัน</button>
                             <input id='refuse' type="button" name="send" value="ปฏิเสธ" class="btn btn-dark"/>
                         </div>
-                    </div>
                     <script>
                     (function () {
                         var dialog = document.getElementById('FirstDialog');
@@ -359,7 +358,7 @@
     </div> 
 </div>
         
-<br>
+<br><br><br>
         <!-- Footer-->
         <footer class="py-1 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Thankyou</p></div>

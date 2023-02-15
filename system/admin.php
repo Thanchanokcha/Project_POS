@@ -9,7 +9,7 @@
 		if ($admin_name == 'admin' && $admin_passwd == 'admin1234') {
 			$_SESSION['id'] = 0 ;
 			$_SESSION['name'] = "Admin";
-			header("location: show_user.php");
+			header("location: show_user1.php");
 		} else {
 			$error_msg = "Incorrect e-mail or password.";
 		}
@@ -42,7 +42,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <!-- ชื่อระบบมุมซ้าย -->
-                <div class="col-md-9"><a class="navbar-brand" href="#!">LOGIN POS</a> </div>
+                <div class="col-md-10"><a class="navbar-brand" href="#!">LOGIN POS</a> </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto"> 
@@ -54,7 +54,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav><br><br><br>
 
         <!-- Page content-->
         
@@ -110,7 +110,7 @@
 		</div>
 	</div>
 </div>
-</div>
+</div><br><br><br>
    
    <!-- Footer-->
    <footer class="py-1 bg-dark">

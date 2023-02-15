@@ -5,7 +5,7 @@
     include_once 'dbconnect.php';
 
     // fetch records
-    $sql = "SELECT * FROM post ORDER BY user_id ASC"; //มากไปน้อย DESC น้อยไปมาก ASC
+    $sql = "SELECT * FROM post ORDER BY user_date1 DESC"; //มากไปน้อย DESC น้อยไปมาก ASC
     $result = mysqli_query($con, $sql);
 
     $cnt = 1;
@@ -47,11 +47,13 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <!-- ชื่อระบบมุมซ้าย -->
-                <div class="col-md-10"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
+                <div class="col-md-7"><a class="navbar-brand" href="#!">LOGIN POS</a></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
-                    <li class="nav-item"><a class="nav-link" href="show_user.php">Admin</a></li>
+                <ul class="navbar-nav ms-auto mb-8 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="show_user1.php">ลงชื่อเข้างาน</a></li>
+                    <li class="nav-item"><a class="nav-link" href="show_user.php">ลาป่วย/ลากิจ</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="add.php">เพิ่มพนักงาน</a></li>
 			        <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Logout</a></li>
      			    <!-- <li class="active"><a href="admin_login.php">Admin</a></li> -->
                 </ul>
@@ -62,7 +64,7 @@
  <header><br>
  <div class="container">
      <!-- <div class="row"> -->
-            <h1 class="text-center">ตารางลงชื่อ</h1>	
+            <h1 class="text-center">ตารางลาป่วย/ลากิจ</h1>	
             <div class="table-responsive">
                 <table class="table table-bordered  bg-white ">
                     <thead>
@@ -79,7 +81,7 @@
                          <th>พิกัด</th>
                          <th>ติดต่อ</th>
                          <th>รูปภาพ</th> -->
-                         <th colspan="2" style="text-align:center">กิจกรรม</th>
+                         <!-- <th colspan="2" style="text-align:center">กิจกรรม</th> -->
                      </tr></center>
                 </thead>
             <tbody>
@@ -94,8 +96,8 @@
                         <td><?php echo $row['user_date2'];?></td>
                         <td><?php echo $row['user_time'];?></td>
                         <td><?php echo $row['user_note'];?></td>
-                        <td><input type="button" value="แก้ไข" name="btn-edit" class="btn btn-dark" onclick = "update_user (<?php echo $row['user_id']; ?>);"></td>
-                        <td><input type="button" value="ลบ" name="btn-delete" class="btn btn-danger" onclick ="delete_user (<?php echo $row['user_id']; ?>);"></td>
+                        <!-- <td><input type="button" value="แก้ไข" name="btn-edit" class="btn btn-dark" onclick = "update_user (<?php echo $row['user_id']; ?>);"></td>
+                        <td><input type="button" value="ลบ" name="btn-delete" class="btn btn-danger" onclick ="delete_user (<?php echo $row['user_id']; ?>);"></td> -->
                     </tr>
                 <?php } ?>
                 </tbody>
