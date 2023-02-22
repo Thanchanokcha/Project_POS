@@ -9,7 +9,7 @@
 		if ($admin_name == 'admin' && $admin_passwd == 'admin1234') {
 			$_SESSION['id'] = 0 ;
 			$_SESSION['name'] = "Admin";
-			header("location: show_user1.php");
+			header("location: show_user.php");
 		} else {
 			$error_msg = "Incorrect e-mail or password.";
 		}
