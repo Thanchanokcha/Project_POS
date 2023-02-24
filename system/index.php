@@ -14,47 +14,48 @@
 			$type =$_POST['user_type'];
 			$name = $_POST['user_name'];
 			$id = $_POST['user_id'];
-			// $breed = $_POST['user_breed'];
-			// $color = $_POST['user_color'];
-			// $gender = $_POST['user_gender'];
-			// $age = $_POST['user_age'];
 			$date1 =$_POST['user_date1'];
 			$date2 =$_POST['user_date2'];
             $time =$_POST['user_time'];
 			$note =$_POST['user_note'];
-			// $img = basename($_FILES["user_img"]["name"]);
-			//$path="upload/" . $img;
-	
-			// $img_type = $_FILES['user_img']['type'];
-			// $size = $_FILES['user_img']['size'];
-			// $img_temp = $_FILES['user_img']['tmp_name'];
-			
-			// $path = "upload/" . $img;
-			// if (!file_exists($path)){
-			// 	move_uploaded_file($img_temp, 'upload/' .$img);
-			// }
-			// if($upload !='') {
-			// 	$path="upload/";
-			// 	//คัดลอกไฟล์ไปยังโฟลเดอร์
-			// 	move_uploaded_file($_FILES['user_img'],$img ); 
-			// }
-
-			// if (empty($img)){
-			// 	$validate_msg ="กรุณาเลือกรูปภาพ";
-			// } else if ($img_type == "image/jpg" || $img_type == "image/jpeg" || $img_type == "image/png" || $img_type == "image/gif") {
-			// 	if (!file_exists($path)){ //เช็คว่ามีไฟล์ที่อัปไหม
-			// 		if ($size < 5000000) { //เช็คขนาดไฟล์ ไม่เกิน 5 mb
-			// 			move_uploaded_file($img_temp, 'upload/' .$img); //เป็นการย้ายไฟล์ที่อัปไปยังโฟลเดอ upload
-			// 		} else {
-			// 			$validate_msg = "รูปภาพของคุณมีขนาดใหญ่เกิน 5 MB"; //เป็นการแจ้งว่าไฟล์มีขนาดใหญ่เกิน
-			// 		}
-			// 	} else {
-			// 		$validate_msg = "คุณยังไม่อัปโหลดรูปภาพ";
-			// 	}
-			// } else {
-			// 	$validate_msg = "กรุณาอัปโหลดรูปภาพที่มีนามสกุลเป็น JPG , JPEG , PNG และ GIF";
-			// }
-		
+            
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            error_reporting(E_ALL);
+            date_default_timezone_set("Asia/Bangkok");
+    
+            $sToken = "pEdSc0O8w2Xstpc2ly2aJR6uDf2JbF8KaZMP5377uEu";
+            $sMessage = "รายงานการลางาน!\r\n";
+            $sMessage .= "รหัสพนักงาน: " . $id . " \r\n";
+            $sMessage .="ชื่อ: " . $name . " ได้ทำการ" . $type . "!\r\n";
+            $sMessage .= "วันที่เริ่มต้น: " . $date1 . " \r\n";
+            $sMessage .= "วันที่สิ้นสุด: " . $date2 . " \r\n";
+            $sMessage .= "เวลา: " . $time . " \r\n";
+            $sMessage .= "หมายเหตุ: " . $note . " \r\n";
+        
+        
+            $chOne = curl_init(); 
+            curl_setopt( $chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify"); 
+            curl_setopt( $chOne, CURLOPT_SSL_VERIFYHOST, 0); 
+            curl_setopt( $chOne, CURLOPT_SSL_VERIFYPEER, 0); 
+            curl_setopt( $chOne, CURLOPT_POST, 1); 
+            curl_setopt( $chOne, CURLOPT_POSTFIELDS, "message=".$sMessage); 
+            $headers = array( 'Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer '.$sToken.'', );
+            curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers); 
+            curl_setopt( $chOne, CURLOPT_RETURNTRANSFER, 1); 
+            $result = curl_exec( $chOne ); 
+        
+            //Result error 
+            if(curl_error($chOne)) 
+            { 
+                echo 'error:' . curl_error($chOne); 
+            } 
+            else { 
+                $result_ = json_decode($result, true); 
+                //echo "status : ".$result_['status']; echo "message : ". $result_['message'];
+            } 
+            curl_close( $chOne );   
+        
 		//2.2 ตรวจสอบความถูกต้องของข้อมูล user 
 		//สร้างตัวแปร validate_error เพื่อเช็ค error
 		$validate_error = false;
@@ -270,35 +271,6 @@
                                             <label for="name">รหัสพนักงาน</label>
                                             <input type="id" name="user_id" placeholder="" required value="<?php echo $_SESSION['id']; ?>" class="form-control" />
                                         </div>
-
-                                        <!-- <div class="form-group">
-                                            <label for="name">พันธุ์</label>
-                                            <input type="text" name="user_breed" placeholder="เช่น พุดเดิ้ล , สกอตติชโฟลด์ , เปอร์เซีย" required value="" class="form-control" />
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="name">สี</label>
-                                            <input type="text" name="user_color" placeholder="เช่น ดำ , ขาว , สามสี" required value="" class="form-control" />
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="name">เพศ</label>
-                                            <input type="text" name="user_gender" placeholder="เช่น ตัวผู้ หรือ ตัวเมีย" required value="" class="form-control" />
-                                        </div> -->
-
-                                        <!-- <div class="form-group">
-                                            <label for="name">เพศ</label>
-                                            <select name="user_gender"required class="form-control">
-                                                <option value="ตัวผู้">ตัวผู้</option>
-                                                <option value="ตัวเมีย">ตัวเมีย</option>
-                                                <option value="ไม่ทราบ">ไม่ทราบ</option>
-                                            </select>
-                                        </div> -->
-
-                                        <!-- <div class="form-group">
-                                            <label for="name">อายุ</label>
-                                            <input type="text" name="user_age" placeholder="เช่น 2 ปี 3 เดือน " required class="form-control" />
-                                        </div> -->
 
                                         <div class="form-group col-md-15">
                                             <label for="name">วันที่เริ่มต้น</label>
