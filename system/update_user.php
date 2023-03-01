@@ -3,31 +3,37 @@
 
 		//13.display old info and update into users table
     include_once 'dbconnect.php';
-    //รับข้อมูลมาแก้ไข
+
 	if (isset($_GET['user_id'])) {
-		$sql = "SELECT * FROM post WHERE user_id = " . $_GET['user_id'];
+		$sql = "SELECT * FROM project WHERE user_id = " . $_GET['user_id'];
 		$result = mysqli_query($con, $sql);
 		$row_update = mysqli_fetch_array($result);
-		$type =$row_update['user_type'];
+		$user_id = $row_update['user_id'];
+		// $type = $row_update['user_type'];
 		$name = $row_update['user_name'];
-		$id = $row_update['user_id'];
-		$date1 = $row_update['user_date1'];
-		$date2 = $row_update['user_date2'];
-        $time = $row_update['user_time'];
-		$note = $row_update['user_note'];	
+		$email = $row_update['user_email'];
+		$passwd = $row_update['user_passwd'];
+		// $gender = $row_update['user_gender'];
+		// $age = $row_update['user_age'];
+		// $date = $row_update['user_date'];
+		// $location = $row_update['user_location'];
+		// $contact = $row_update['user_contact'];
+		// $img = $row_update['user_img'];
 	}
 
-	//กดปุ่มแล้วบันทึกลง data base
+	//check whether update button is clicked
 	if (isset($_POST['update'])) {
-
 		$user_id = $_POST['id'];
-		$type =$_POST['user_type'];
+		// $type =$_POST['user_type'];
 		$name = $_POST['user_name'];
-		$id = $_POST['user_id'];
-		$date1 =$_POST['user_date1'];
-		$date2 =$_POST['user_date2'];
-        $time =$_POST['user_time'];
-		$note =$_POST['user_note'];
+		$email = $_POST['user_email'];
+		$passwd = $_POST['user_passwd'];
+		// $gender = $_POST['user_gender'];
+		// $age = $_POST['user_age'];
+		// $date =$_POST['user_date'];
+		// $location =$_POST['user_location'];
+		// $contact =$_POST['user_contact'];
+		// $img =$_POST['user_img'];
 
 		//สร้างตัวแปร validate_error เพื่อเช็ค error
 		$validate_error = false;
@@ -36,16 +42,17 @@
 
 
 		if (!$validate_error) {
-			$sql = "UPDATE post SET  user_type = '" . $type . "' , user_name = '" . $name . "', user_date1 = '" . $date1 . "' , user_date2 = '" . $date2 . "', user_time = '" . $time . "', user_note = '" . $note . "'  WHERE user_id = " . $id;
+			$sql = "UPDATE project SET user_name = '" . $name . "', user_name = '" . $name . "', user_email = '" . $email . "' , user_passwd = '" . $passwd . "'  WHERE user_id = " . $user_id;
 			
 			if (mysqli_query($con, $sql)) {
-				header ("location: history.php");
+				header ("location: member.php");
 			} else {
 				$error_msg = "อัปเดตข้อมูลไม่สำเร็จ";
 			}
 		}
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -98,81 +105,58 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
                         <!-- แถมเมนู -->
-
-                        <?php if (isset($_SESSION['id'])) { ?>
-                        <li class="nav-item"><a class="nav-link"> รหัสพนักงาน&nbsp;<?php echo $_SESSION['id']; ?>&nbsp;คุณ<?php echo $_SESSION['name']; ?></a></li>
-		                <?php }  ?>
-                        <li class="nav-item"><a class="nav-link" href="history.php">ประวัติการเข้างาน</a></li>
-			            <li class="nav-item"><a class="nav-link" href="login.php">Logout</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="show_user.php">ลงชื่อเข้างาน</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="show_user1.php">ลาป่วย/ลากิจ</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="add.php">เพิ่มพนักงาน</a></li>
+			                <li class="nav-item"><a class="nav-link" href="member.php">รายชื่อพนักงาน</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Logout</a></li>
                         <!-- <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li> -->
                         <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
                     </ul>
                 </div>
             </div>
         </nav>
+</head>
 
 <header><br>
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-md-3 col-md-offset-4 well">
-			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="updateform">
+		<div class="col-md-5 col-md-offset-4 well">
+			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="project" name="updateform">
 				<fieldset>
 					
-					<h1 class="masthead-heading mb-0 text text-center">อัปเดตข้อมูล</h1>
-        			<!-- Icon Divider-->
-       				
+					<h1 class="masthead-heading mb-0 text text-center">อัปเดตข้อมูลพนักงาน</h1>
+
 					<!--14.display old info in text field -->
+                    <br>
 					<div class="form-group">
 						<input type="hidden" name="id" value="<?php echo $user_id; ?>" />
-						<br>
-                                   <div class="form-check">
-								   			<center>
-                                            <label for="name">ประเภท</label>
-                                            <label class="form-check-label" for="name">ลากิจ</label>
-                                            <input type="radio" name="user_type" value="ลากิจ">
-                                            <label class="form-check-label" for="name">ลาป่วย</label>
-                                            <input type="radio" name="user_type" value="ลาป่วย">
-											</center>
-                                        </div>
 
-                                        <div class="form-group col-md-15">
-                                            <label for="name">ชื่อ</label>
-                                            <input type="text" name="user_name" placeholder="" required value="<?php echo $_SESSION['name']; ?>"readonly class="form-control" />
-                                        </div>
-                                
-                                        <div class="form-group col-md-15">
-                                            <label for="name">รหัสพนักงาน</label>
-                                            <input type="id" name="user_id" placeholder="" required value="<?php echo $_SESSION['id']; ?>"readonly class="form-control" />
-                                        </div>
-
-
-                                        <div class="form-group col-md-15">
-                                            <label for="name">วันที่เริ่มต้น</label>
-                                            <input type="date" name="user_date1" required class="form-control" />
-                                        </div>
-
-                                        <div class="form-group col-md-15">
-                                            <label for="name">วันที่สิ้นสุด</label>
-                                            <input type="date" name="user_date2" required class="form-control" />
-                                        </div>
-
-                                        <div class="form-group col-md-15">
-                                            <label for="name">เวลา</label>
-                                            <input type="time" name="user_time"  required class="form-control" />
-                                        </div>
-
-                                        <div class="form-group col-md-15">
-                                            <label for="name">หมายเหตุ</label>
-                                            <input type="text" name="user_note" required class="form-control" />
-                                        </div> 
-                                    
-					</div>
+						<label for="name">รหัสพนักงาน</label>
+						<input type="text" name="user_id"  required value="<?php echo $user_id; ?>" class="form-control" />
 					
+					</div>
+
+					
+					<div class="form-group">
+                    <label for="name">ชื่อ</label>
+						<input type="text" name="user_name"  required value="<?php echo $name; ?>" class="form-control" />
+					</div>
+
+					<div class="form-group">
+					<label for="name">ชื่อผู้ใช้งาน</label>
+						<input type="text" name="user_email" required value="<?php echo $email; ?>" class="form-control" />
+					</div>
+
+					<div class="form-group">
+					<label for="name">รหัสผ่าน</label>
+						<input type="text" name="user_passwd" required value="<?php echo $passwd; ?>" class="form-control">
+					</div>
+
 					<center>
 					<div class="form-group">
-						<input type="submit" name="update" value="อัพเดต" class="btn btn-dark" />
+						<input type="submit" name="update" value="อัพเดต" class="btn btn-dark"/>
 					</div>
-					</center>
 				</fieldset>
 				<!-- <button onclick="document.location='show_user.php'" class="btn btn-secondary">ย้อนกลับ</button> -->
 			</form>
@@ -182,10 +166,9 @@
 	</div>
 </div>
 <!-- <br> -->
-<center><button onclick="document.location='history.php'" class="btn btn-dark">ย้อนกลับ</button></center>
+<center><button onclick="document.location='member.php'" class="btn btn-dark">ย้อนกลับ</button></center><br>
 </header>
-<br>
-        <!-- Footer-->
+   <!-- Footer-->
         <footer class="py-1 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Thankyou</p></div>
         </footer>

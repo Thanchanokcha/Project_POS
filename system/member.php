@@ -5,16 +5,16 @@
     include_once 'dbconnect.php';
 
     // fetch records
-    $sql = "SELECT * FROM work_pos ORDER BY work_date DESC"; //มากไปน้อย DESC น้อยไปมาก ASC
+    $sql = "SELECT * FROM project ORDER BY user_id ASC"; //มากไปน้อย DESC น้อยไปมาก ASC
     $result = mysqli_query($con, $sql);
 
     $cnt = 1;
 
     // delete record ลบการบันทึก
     if (isset($_GET['user_id'])) {
-        $sql = "DELETE FROM work_pos where user_id = " . $_GET['user_id'];
+        $sql = "DELETE FROM project where user_id = " . $_GET['user_id'];
         mysqli_query($con, $sql);
-        header("location: show_user.php");
+        header("location: member.php");
     }
 
  ?>
@@ -51,11 +51,11 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-8 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="show_user.php">ลงชื่อเข้างาน</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="show_user.php">ลงชื่อเข้างาน</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="show_user1.php">ลาป่วย/ลากิจ</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="add.php">เพิ่มพนักงาน</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="member.php">รายชื่อพนักงาน</a></li>
-			        <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Logout</a></li>
+			        <li class="nav-item"><a class="nav-link" href="member.php">รายชื่อพนักงาน</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Logout</a></li>
      			    <!-- <li class="active"><a href="admin_login.php">Admin</a></li> -->
                 </ul>
                 </div>
@@ -65,20 +65,22 @@
  <header><br>
  <div class="container">
      <!-- <div class="row"> -->
-            <h1 class="text-center">ตารางลงชื่อ</h1>	
+            <h1 class="text-center">ตารางรายชื่อพนังาน</h1>	
             <div class="table-responsive">
                 <table class="table table-bordered  bg-white ">
                     <thead>
                      <tr><center>
                          <th>รหัสพนักงาน</th>
                          <th>ชื่อ</th>
-                         <th>วันที่</th>
-                         <th>เวลา</th> 
+                         <th>ชื่อผู้ใช้งาน</th>
+                         <th>รหัสผ่าน</th>
+                         <th colspan="2" style="text-align:center">กิจกรรม</th>
                          <!-- <th>อายุ</th>
                          <th>วันที่โพสต์</th>
                          <th>พิกัด</th>
                          <th>ติดต่อ</th>
                          <th>รูปภาพ</th> -->
+                         <!-- <th colspan="2" style="text-align:center">กิจกรรม</th> -->
                      </tr></center>
                 </thead>
             <tbody>
@@ -88,8 +90,10 @@
                     <tr>
                         <td><?php echo $row['user_id'];?></td>
                         <td><?php echo $row['user_name'];?></td>
-                        <td><?php echo $row['work_date'];?></td>
-                        <td><?php echo $row['work_in'];?></td>
+                        <td><?php echo $row['user_email'];?></td>
+                        <td><?php echo $row['user_passwd'];?></td>
+                        <td><input type="button" value="แก้ไข" name="btn-edit" class="btn btn-dark" onclick = "update_user (<?php echo $row['user_id']; ?>);"></td>
+                        <td><input type="button" value="ลบ" name="btn-delete" class="btn btn-danger" onclick ="delete_user (<?php echo $row['user_id']; ?>);"></td>
                     </tr>
                 <?php } ?>
                 </tbody>
@@ -105,7 +109,7 @@
         //delete
         function delete_user(id) {
             if (confirm("คุณต้องการลบข้อมูลหรือไม่ ?")) {
-                window.location.href = "show_user1.php?user_id=" + id;
+                window.location.href = "member.php?user_id=" + id;
             }
         }
         //update

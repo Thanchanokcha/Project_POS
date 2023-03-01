@@ -69,15 +69,16 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <!-- ชื่อระบบมุมซ้าย -->
-                <div class="col-md-7"><a class="navbar-brand" href="#!">LOGIN POS</a> </div>
+                <div class="col-md-6"><a class="navbar-brand" href="#!">LOGIN POS</a> </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto"> 
                         <!-- แถมเมนู -->
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="show_user1.php">ลงชื่อเข้างาน</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="show_user1.php">ลงชื่อเข้างาน</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="show_user.php">ลาป่วย/ลากิจ</a></li>
                     <li class="nav-item"><a class="nav-link" href="add.php">เพิ่มพนักงาน</a></li>
-			        <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Logout</a></li>
+			        <li class="nav-item"><a class="nav-link active" aria-current="page" href="member.php">รายชื่อพนักงาน</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Logout</a></li>
                         <!-- <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li> -->
                         <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
                     </ul>
