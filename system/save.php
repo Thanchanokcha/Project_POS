@@ -35,7 +35,7 @@ include("dbconnect.php");
         $sMessage = "รายงานการเข้าทำงาน!\r\n";
         $sMessage .= "รหัสพนักงาน: " . $id . " \r\n";
         $sMessage .= $name . " ได้ทำการเข้างานเรียบร้อยแล้ว!\r\n";
-        $sMessage .= "เวลา: " . $workin . " \r\n";
+        $sMessage .= "เวลา: " . $workin . " ";
     
     
         $chOne = curl_init(); 

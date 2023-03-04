@@ -55,7 +55,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <!-- ชื่อระบบมุมซ้าย -->
-                <div class="col-md-5"><a class="navbar-brand" href="index.php">LOGIN POS</a></div>
+                <div class="col-md-4"><a class="navbar-brand" href="index.php">LOGIN POS</a></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-0 mb-lg-0"> 
@@ -77,9 +77,9 @@
      <!-- <div class="row"> -->
             <h1 class="text-center">ตารางลงชื่อ</h1>	
             <div class="table-responsive">
-                <table class="table table-bordered  bg-white ">
+                <table class="table table-bordered bg-white table-sm table-hover">
                     <thead>
-                     <tr><center>
+                     <tr class="text-nowrap text-center">
                          <th>รหัสพนักงาน</th>
                          <th>ชื่อ</th>
                          <th>ลงชื่อเข้าทำงาน</th>
@@ -90,13 +90,13 @@
                          <th>กิจกรรม</th>
 
                          <!-- <th colspan="2" style="text-align:center">กิจกรรม</th> -->
-                     </tr></center>
+                     </tr>
                 </thead>
             <tbody>
 
                 <!--10.show all users in this part of table ใช้วน loop ด้วยคำสั่ง while -->
                 <?php while ($row = mysqli_fetch_array($result)){ ?>
-                    <tr>
+                    <tr class="text-nowrap text-center">
                         <td><?php echo $row['user_id'];?></td>
                         <td><?php echo $row['user_name'];?></td>
                         <td><?php echo $row['user_type'];?></td>
@@ -104,8 +104,10 @@
                         <td><?php echo $row['user_date2'];?></td>
                         <td><?php echo $row['user_time'];?></td>
                         <td><?php echo $row['user_note'];?></td>
+                        <center>
                         <!-- <td><input type="button" value="แก้ไข" name="btn-edit" class="btn btn-dark" onclick = "update_user (<?php echo $row['user_id']; ?>);"></td> -->
                         <td><input type="button" value="ลบ" name="btn-delete" class="btn btn-danger" onclick ="delete_user (<?php echo $row['id']; ?>);"></td>
+                        </center>
                     </tr>
                 <?php } ?>
                 </tbody>

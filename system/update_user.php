@@ -42,7 +42,7 @@
 
 
 		if (!$validate_error) {
-			$sql = "UPDATE project SET user_name = '" . $name . "', user_name = '" . $name . "', user_email = '" . $email . "' , user_passwd = '" . $passwd . "'  WHERE user_id = " . $user_id;
+			$sql = "UPDATE project SET  user_name = '" . $name . "', user_email = '" . $email . "' , user_passwd = '" . $passwd . "'  WHERE user_id = " . $user_id;
 			
 			if (mysqli_query($con, $sql)) {
 				header ("location: member.php");
@@ -122,7 +122,7 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-md-5 col-md-offset-4 well">
-			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="project" name="updateform">
+			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="updateform">
 				<fieldset>
 					
 					<h1 class="masthead-heading mb-0 text text-center">อัปเดตข้อมูลพนักงาน</h1>

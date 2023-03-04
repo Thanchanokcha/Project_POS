@@ -31,7 +31,7 @@
             $sMessage .= "วันที่เริ่มต้น: " . $date1 . " \r\n";
             $sMessage .= "วันที่สิ้นสุด: " . $date2 . " \r\n";
             $sMessage .= "เวลา: " . $time . " \r\n";
-            $sMessage .= "หมายเหตุ: " . $note . " \r\n";
+            $sMessage .= "หมายเหตุ: " . $note . " ";
         
         
             $chOne = curl_init(); 
@@ -148,8 +148,6 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="history1.php">ประวัติการเข้างาน</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="history.php">ประวัติการลางาน</a></li>
 			            <li class="nav-item"><a class="nav-link active" aria-current="page" href="login.php">Logout</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li> -->
-                        <!-- <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
                     </ul>
                 </div>
             </div>
@@ -183,7 +181,7 @@
             <dialog id="FirstDialog">
                 <form action="save.php" method="post" class="form-horizontal">
                 <div class="">
-                    <h3> ลงเวลาเข้างาน <?php echo date('d-m-Y');?></h3>        
+                    <h3> ลงเวลาเข้างาน <br>วันที่ <?php echo date('d-m-Y');?> </h3>        
                     <div class="form-group">
                     <center>
                         <div class="form-group col-md-7">
@@ -229,16 +227,6 @@
                             <div class="col-md-10 col-md-offset-4 well">
                                 <form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post"  enctype="multipart/form-data" name="sendform">
                                     <fieldset><br>
-                                    <!--<div class="form-group">
-                                            <label for="name">รหัสพนักงาน</label>
-                                            <?php echo $_SESSION['id']; ?>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="name">ชื่อ</label>
-                                            <?php echo $_SESSION['name']; ?>
-                                        </div>
-                                    -->
 
                                         <div class="form-check">
                                             <label for="name">ประเภท</label>
@@ -248,21 +236,6 @@
                                             <input type="radio" name="user_type" value="ลาป่วย">
                                         </div>
 
-                                        <!-- <form action="" method="post" enctype="multipart/form-data">
-                                            <input type="text" name="img_name" required class="form-control" placeholder="ชื่อภาพ"> <br>
-                                            <label for="name">รูปภาพ</label>
-                                            <input type="file" name="img_file" required accept="image/jpeg, image/png, image/jpg">
-                                            <font color="red">*อัพโหลดได้เฉพาะ .jpeg , .jpg , .png </font><br><br>
-                                            <button type="submit" class="btn btn-secondary">อัปโหลด</button>
-                                        </form>-->
-
-                                        <!-- <form action="" method="post" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label for="name">รูปภาพ</label>
-                                            <input type="file" name="user_img">
-                                        </div>
-                                        </form>
-                                        -->
                                         <div class="form-group col-md-15">
                                             <label for="name">ชื่อ</label>
                                             <input type="text" name="user_name" placeholder="" required value="<?php echo $_SESSION['name']; ?>" class="form-control" />
@@ -295,7 +268,7 @@
                                         
                                         <center>
                                         <div class="form-group">
-                                            <input type="submit" name="send" value="ยืนยัน" class="btn btn-dark"/>
+                                            <input type="submit" name="send" value="ยืนยัน" class="btn btn-dark" onclick="alert('บันทึกข้อมูลการลาสำเร็จ');"/>
                                             <button id="close" class="btn btn-dark">ย้อนกลับ</button>
                                         </div>
                                         </center>
@@ -325,7 +298,6 @@
                         };
                     })();
                 </script>
-            
             </div>
         </div>
     </div> 

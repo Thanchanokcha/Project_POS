@@ -69,7 +69,7 @@
             <div class="table-responsive">
                 <table class="table table-bordered  bg-white ">
                     <thead>
-                     <tr><center>
+                     <tr class="text-nowrap text-center"    >
                          <th>รหัสพนักงาน</th>
                          <th>ชื่อ</th>
                          <th>วันที่</th>
@@ -79,13 +79,13 @@
                          <th>พิกัด</th>
                          <th>ติดต่อ</th>
                          <th>รูปภาพ</th> -->
-                     </tr></center>
+                     </tr>
                 </thead>
             <tbody>
 
                 <!--10.show all users in this part of table ใช้วน loop ด้วยคำสั่ง while -->
                 <?php while ($row = mysqli_fetch_array($result)) { ?>
-                    <tr>
+                    <tr class="text-nowrap text-center">
                         <td><?php echo $row['user_id'];?></td>
                         <td><?php echo $row['user_name'];?></td>
                         <td><?php echo $row['work_date'];?></td>
